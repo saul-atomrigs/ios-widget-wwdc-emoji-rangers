@@ -9,15 +9,19 @@ import WidgetKit
 import SwiftUI
 
 struct LeaderboardProvider: TimelineProvider {
+    
     public typealias Entry = LeaderboardEntry
-
-    public func snapshot(with context: Context, completion: @escaping (LeaderboardEntry) -> Void) {
+    
+    func placeholder(in context: Context) -> LeaderboardEntry {
+        return LeaderboardEntry(date: Date(), characters: CharacterDetail.availableCharacters)
+    }
+    
+    func getSnapshot(in context: Context, completion: @escaping (LeaderboardEntry) -> Void) {
         let entry = LeaderboardEntry(date: Date(), characters: CharacterDetail.availableCharacters)
-
         completion(entry)
     }
-
-    public func timeline(with context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
+    
+    func getTimeline(in context: Context, completion: @escaping (Timeline<LeaderboardEntry>) -> Void) {
         CharacterDetail.loadLeaderboardData { (characters, error) in
             guard let characters = characters else {
                 let timeline = Timeline(entries: [LeaderboardEntry(date: Date(), characters: CharacterDetail.availableCharacters)], policy: .atEnd)
@@ -30,6 +34,7 @@ struct LeaderboardProvider: TimelineProvider {
             completion(timeline)
         }
     }
+    
 }
 
 struct LeaderboardEntry: TimelineEntry {

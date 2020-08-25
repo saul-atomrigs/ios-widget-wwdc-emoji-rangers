@@ -9,26 +9,21 @@ import WidgetKit
 import SwiftUI
 
 struct Provider: IntentTimelineProvider {
+    
     typealias Intent = DynamicCharacterSelectionIntent
     
     public typealias Entry = SimpleEntry
     
-    func character(for configuration: DynamicCharacterSelectionIntent) -> CharacterDetail {
-        if let name = configuration.hero?.identifier, let character = CharacterDetail.characterFromName(name: name) {
-            // Save the last selected character to our App Group.
-            CharacterDetail.setLastSelectedCharacter(heroName: name)
-            return character
-        }
-        return .panda
+    func placeholder(in context: Context) -> SimpleEntry {
+        SimpleEntry(date: Date(), relevance: nil, character: .panda)
     }
-
-    public func snapshot(for configuration: DynamicCharacterSelectionIntent, with context: Context, completion: @escaping (SimpleEntry) -> Void) {
+    
+    func getSnapshot(for configuration: DynamicCharacterSelectionIntent, in context: Context, completion: @escaping (SimpleEntry) -> Void) {
         let entry = SimpleEntry(date: Date(), relevance: nil, character: .panda)
-        
         completion(entry)
     }
-
-    public func timeline(for configuration: DynamicCharacterSelectionIntent, with context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
+    
+    func getTimeline(for configuration: DynamicCharacterSelectionIntent, in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> Void) {
         let selectedCharacter = character(for: configuration)
         let endDate = selectedCharacter.fullHealthDate
         let oneMinute: TimeInterval = 60
@@ -46,6 +41,15 @@ struct Provider: IntentTimelineProvider {
         let timeline = Timeline(entries: entries, policy: .atEnd)
         
         completion(timeline)
+    }
+    
+    func character(for configuration: DynamicCharacterSelectionIntent) -> CharacterDetail {
+        if let name = configuration.hero?.identifier, let character = CharacterDetail.characterFromName(name: name) {
+            // Save the last selected character to our App Group.
+            CharacterDetail.setLastSelectedCharacter(heroName: name)
+            return character
+        }
+        return .panda
     }
 }
 

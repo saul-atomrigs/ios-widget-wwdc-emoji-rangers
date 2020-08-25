@@ -9,20 +9,24 @@ import WidgetKit
 import SwiftUI
 
 struct Provider: TimelineProvider {
+    
     public typealias Entry = SimpleEntry
-
-    public func snapshot(with context: Context, completion: @escaping (SimpleEntry) -> Void) {
+    
+    func placeholder(in context: Context) -> SimpleEntry {
+        return SimpleEntry(date: Date(), character: .panda)
+    }
+    
+    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> Void) {
         let entry = SimpleEntry(date: Date(), character: .panda)
-        
         completion(entry)
     }
-
-    public func timeline(with context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
+    
+    func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> Void) {
         let entries = [SimpleEntry(date: Date(), character: .panda)]
         let timeline = Timeline(entries: entries, policy: .atEnd)
-
         completion(timeline)
     }
+    
 }
 
 struct SimpleEntry: TimelineEntry {

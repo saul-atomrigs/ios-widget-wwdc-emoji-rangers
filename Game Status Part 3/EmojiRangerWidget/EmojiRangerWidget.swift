@@ -14,26 +14,16 @@ struct Provider: IntentTimelineProvider {
     
     public typealias Entry = SimpleEntry
     
-    func character(for configuration: CharacterSelectionIntent) -> CharacterDetail {
-        switch configuration.hero {
-        case .panda:
-            return .panda
-        case .egghead:
-            return .egghead
-        case .spouty:
-            return .spouty
-        default:
-            return .panda
-        }
+    func placeholder(in context: Context) -> SimpleEntry {
+        return SimpleEntry(date: Date(), relevance: nil, character: .panda)
     }
-
-    public func snapshot(for configuration: CharacterSelectionIntent, with context: Context, completion: @escaping (SimpleEntry) -> Void) {
+    
+    func getSnapshot(for configuration: CharacterSelectionIntent, in context: Context, completion: @escaping (SimpleEntry) -> Void) {
         let entry = SimpleEntry(date: Date(), relevance: nil, character: .panda)
-
         completion(entry)
     }
-
-    public func timeline(for configuration: CharacterSelectionIntent, with context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
+    
+    func getTimeline(for configuration: CharacterSelectionIntent, in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> Void) {
         let selectedCharacter = character(for: configuration)
         let endDate = selectedCharacter.fullHealthDate
         let oneMinute: TimeInterval = 60
@@ -52,6 +42,20 @@ struct Provider: IntentTimelineProvider {
 
         completion(timeline)
     }
+    
+    func character(for configuration: CharacterSelectionIntent) -> CharacterDetail {
+        switch configuration.hero {
+        case .panda:
+            return .panda
+        case .egghead:
+            return .egghead
+        case .spouty:
+            return .spouty
+        default:
+            return .panda
+        }
+    }
+    
 }
 
 struct SimpleEntry: TimelineEntry {
