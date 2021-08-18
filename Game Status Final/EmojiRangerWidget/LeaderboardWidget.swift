@@ -61,6 +61,14 @@ struct LeaderboardWidgetEntryView: View {
 
 struct LeaderboardWidget: Widget {
     private let kind: String = "LeaderboardWidget"
+    
+    private static var supportedFamilies: [WidgetFamily] {
+            if #available(iOS 15, *) {
+                return [.systemLarge, .systemExtraLarge]
+            } else {
+                return [.systemLarge]
+            }
+        }
 
     public var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: LeaderboardProvider()) { entry in
@@ -68,7 +76,7 @@ struct LeaderboardWidget: Widget {
         }
         .configurationDisplayName("Ranger Leaderboard")
         .description("See all the rangers.")
-        .supportedFamilies([.systemLarge])
+        .supportedFamilies(LeaderboardWidget.supportedFamilies)
     }
 }
 
