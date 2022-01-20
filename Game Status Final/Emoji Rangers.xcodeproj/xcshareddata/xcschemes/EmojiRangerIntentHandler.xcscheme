@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1200"
+   LastUpgradeVersion = "1320"
    version = "2.0"
    wasCreatedForAppExtension = "YES">
    <BuildAction
@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5733B35A248884F60035C9B7"
-               BuildableName = "CharacterDetailExtension.appex"
-               BlueprintName = "CharacterDetailExtension"
+               BlueprintIdentifier = "434AEDAF249168BC0047C5DD"
+               BuildableName = "EmojiRangerIntentHandler.appex"
+               BlueprintName = "EmojiRangerIntentHandler"
                ReferencedContainer = "container:Emoji Rangers.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -56,18 +56,8 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
-      <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.springboard">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5733B35A248884F60035C9B7"
-            BuildableName = "CharacterDetailExtension.appex"
-            BlueprintName = "CharacterDetailExtension"
-            ReferencedContainer = "container:Emoji Rangers.xcodeproj">
-         </BuildableReference>
-      </RemoteRunnable>
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5733B3282488842D0035C9B7"
@@ -75,24 +65,7 @@
             BlueprintName = "Emoji Rangers"
             ReferencedContainer = "container:Emoji Rangers.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "_XCWidgetKind"
-            value = "EmojiRangerWidget"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "_XCWidgetDefaultView"
-            value = "timeline"
-            isEnabled = "NO">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "_XCWidgetFamily"
-            value = "medium"
-            isEnabled = "NO">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
